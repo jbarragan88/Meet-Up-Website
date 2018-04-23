@@ -7,9 +7,9 @@ export class HttpService {
 
   constructor(private _http: HttpClient) { }
 
-  // addProduct(product){
-  //   return this._http.post('/api/create', product);
-  // }
+  createUser(user){
+    return this._http.post('/api/create/user', user);
+  }
   
   // getProducts(){
   //   return this._http.get('/api/all/');

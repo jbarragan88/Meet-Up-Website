@@ -81,29 +81,27 @@ app.use(bodyParser.urlencoded({extended: true}));
 //*
 //*
 // Routes
-// Root Request
-// app.post('/api/create', function(req, res){
-//     console.log("Server Add Product", req.body);
-//     var product = new Product({title: req.body.title, price: req.body.price, image: req.body.image})
-//     product.save(function(err){
-//         if(err){
-//             var message = {message: "Error", data: err};
-//             if(req.body.price == 0 || !req.body.price ){
-//                 message.price = "Invalid";
-//             }
-//             res.json(message)
-//         }
-//         else if(req.body.price == 0 || !req.body.price ){
-//             var message = {message: "Error"};
-//             message.price = "Invalid";
-//             res.json(message)
-//         }
-//         else{
-//             res.json({message: "Success", data: "made it"})
-//         }
-//     })
-//     console.log("Server Added Author", product);
-// });
+app.post('/api/create/user', function(req, res){
+    console.log("Server Register User", req.body);
+    var user = new User({
+        name: req.body.name,
+        email: req.body.email,
+        password: UserSchema.methods.hashPassword(req.body.password)
+})
+    user.save(function(err){
+        if(err){
+            var message = {message: "Error", data: err};
+            if(req.body.name < 4 || !req.body.name ){
+                message.name = "Invalid";
+            }
+            res.json(message)
+        }
+        else{
+            res.json({message: "Success", data: "made it"})
+        }
+    })
+    console.log("Server Added User", user);
+});
 
 // app.post('/api/edit', function(req, res){
 //     console.log("Server Edit Product", req.body, "ID:", req.params.id);
