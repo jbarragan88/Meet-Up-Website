@@ -7,21 +7,60 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var path = require('path');
 
-// var Schema = mongoose.Schema;
+var Schema = mongoose.Schema;
 
-// // Use native promises
-// mongoose.Promise = global.Promise;
-// // Require path
-// // This is how we connect to the mongodb database using mongoose -- "basic_mongoose" is the name of
-// //   our db in mongodb -- this should match the name of the db you are going to use for your project.
-// mongoose.connect('mongodb://localhost/product');
-// var ProductSchema = new mongoose.Schema({
-//     title: {type: String, required: [true, "Missing Name"], minlength: [4, "Title Must Be longer than 4 Characters"]},
-//     price: {type: Number, required: [true, "Missing Price"]},
-//     image: {type: String}
-// }, {timestamps: true } )
-// mongoose.model('Product', ProductSchema); 
-// var Product = mongoose.model('Product') 
+require('mongoose-type-email');
+// Use native promises
+mongoose.Promise = global.Promise;
+// Require path
+// This is how we connect to the mongodb database using mongoose -- "basic_mongoose" is the name of
+//   our db in mongodb -- this should match the name of the db you are going to use for your project.
+mongoose.connect('mongodb://localhost/meetup');
+//Users Collection
+var UserSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: [true, "Missing Name"],
+        minlength: [4, "Name Must Be longer than 4 Characters"],
+        maxlength: [30, "First Name Must Be Shorter Than 30 Characters"]
+    },
+    email: {
+        type: mongoose.SchemaTypes.Email,
+        unique: true,
+        required: [true, "Missing Email"]
+    },
+    password: {
+        type: String
+    }
+}, {timestamps: true } )
+mongoose.model('User', UsertSchema); 
+var User = mongoose.model('User') ;
+
+UserSchema.methods.hashPassword = function(password){
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+}
+
+UserSchema.methods.validPassword = function(password1, password2){
+    return bcrypt.compareSync(password1, password2)
+}
+//Event Collection
+var EventSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: [true, "Missing Event Name"],
+        minlength: [5, "Event Name Must Be longer than 5 Characters"],
+        maxlength: [40, "Event Name Must Be Shorter Than 40 Characters"]
+    },
+    description: {
+        type: String,
+        required: [true, "Missing Description"],
+        minlength: [50, "Description Must Be longer than 50 Characters"],
+        maxlength: [400, "Description Must Be Shorter Than 400 Characters"]
+    },
+    topics: []
+}, {timestamps: true } )
+mongoose.model('Event', EventSchema); 
+var Event = mongoose.model('Event') 
 
 //*
 //*
