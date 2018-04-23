@@ -22,7 +22,7 @@ var path = require('path');
 // }, {timestamps: true } )
 // mongoose.model('Product', ProductSchema); 
 // var Product = mongoose.model('Product') 
-//changes
+
 //*
 //*
 //
@@ -34,7 +34,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, './static')));
 // Setting our Views Folder Directory
 app.set('views', path.join(__dirname, './views'));
-app.use(express.static( __dirname + '/product/dist' ));
+app.use(express.static( __dirname + '/websiteApp/dist' ));
 app.use(bodyParser.urlencoded({extended: true}));
 //*
 //*
@@ -134,7 +134,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.all("*", (req,res,next) => {
     console.log("to the back you go")
-    res.sendFile(path.resolve("./public/dist/index.html"))
+    res.sendFile(path.resolve("./websiteApp/dist/index.html"))
 });
 
 // Setting our Server to Listen on Port: 8000
