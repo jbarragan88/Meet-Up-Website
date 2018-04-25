@@ -90,6 +90,7 @@ app.post('/api/create/user', function(req, res){
 })
     user.save(function(err){
         if(err){
+            console.log("Server could not Register Error:", err);
             var message = {message: "Error", data: err};
             if(req.body.name < 4 || !req.body.name ){
                 message.name = "Invalid";
@@ -97,6 +98,7 @@ app.post('/api/create/user', function(req, res){
             res.json(message)
         }
         else{
+            console.log("Successful Register");
             res.json({message: "Success", data: "made it"})
         }
     })
@@ -110,6 +112,7 @@ app.get('/api/login/user', function(req, res){
             res.json({message: "Error", data: err})
         }
         else{
+            console.log("Success Loggin In");
             res.json({message: "Success", data: user})
         }
     })

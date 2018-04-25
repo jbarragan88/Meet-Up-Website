@@ -29,6 +29,9 @@ export class LoginComponent implements OnInit {
       if(data["message"] == "Error"){
 
       }
+      else{
+
+      }
     })
   }
   //function to when user uses Login form
@@ -39,6 +42,9 @@ export class LoginComponent implements OnInit {
       //if Login error
       if(data["message"] == "Error"){
 
+      }
+      else{
+        
       }
     })
   }

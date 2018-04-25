@@ -3,14 +3,15 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { CreateComponent } from './create/create.component';
 import { EventdetailsComponent } from './eventdetails/eventdetails.component';
-import { FollowingComponent } from './following/following.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   { path: 'home',component: HomeComponent },
   { path: 'create_event',component: CreateComponent },
+  { path: 'create_event',component: CreateComponent },
   { path: 'event/:id',component: EventdetailsComponent },
-  { path: 'follwing',component: FollowingComponent },
-  { path: '', pathMatch: 'full', redirectTo: '/home' }
+  { path: 'login',component: LoginComponent },
+  { path: '', pathMatch: 'full', redirectTo: '/login' }
 ];
 
 @NgModule({
