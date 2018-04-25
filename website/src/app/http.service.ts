@@ -4,7 +4,7 @@ import { AppModule } from './app.module';
 
 @Injectable()
 export class HttpService {
-
+  User_Logged_In: any;
   constructor(private _http: HttpClient) { }
 
   createUser(user){
@@ -12,6 +12,10 @@ export class HttpService {
   }
   loginUser(user){
     return this._http.get('/api/login/user', user);
+  }
+  success(user){
+    this.User_Logged_In = user;
+    return this.User_Logged_In;
   }
   
   // getProducts(){

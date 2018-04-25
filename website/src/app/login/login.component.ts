@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
   user = {name: "", email: "", password: ""};
   create_error= {name: "", email: "", password: ""};
   login_error= {name: "", password: ""};
+  login: any;
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
@@ -29,8 +30,20 @@ export class LoginComponent implements OnInit {
       if(data["message"] == "Error"){
 
       }
+      //if no errors
       else{
+        let observablee = this._httpService.loginUser(this.user);
+        observablee.subscribe(data => {
+        //if Login error
+          if(data["message"] == "Error"){
 
+          }
+          //if no errors
+          else{
+            this.login = this._httpService.success(this.login)
+            this._router.navigate(['/home']);
+          }
+        })
       }
     })
   }
@@ -43,8 +56,10 @@ export class LoginComponent implements OnInit {
       if(data["message"] == "Error"){
 
       }
+      //if no errors
       else{
-        
+        this.login = this._httpService.success(this.login)
+        this._router.navigate(['/home']);
       }
     })
   }
