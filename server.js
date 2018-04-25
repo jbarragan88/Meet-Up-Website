@@ -102,6 +102,18 @@ app.post('/api/create/user', function(req, res){
     })
     console.log("Server Added User", user);
 });
+app.get('/api/login/user', function(req, res){
+    console.log("Server Login User", req.body);
+    User.findOne({email: req.body.email}, function(err, user){
+        if(err){
+            console.log("Server cannot log in this user Error:", err);
+            res.json({message: "Error", data: err})
+        }
+        else{
+            res.json({message: "Success", data: user})
+        }
+    })
+});
 
 // app.post('/api/edit', function(req, res){
 //     console.log("Server Edit Product", req.body, "ID:", req.params.id);
