@@ -10,7 +10,8 @@ import { AppModule } from '../app.module';
 })
 export class LoginComponent implements OnInit {
   user = {name: "", email: "", password: ""};
-
+  create_error= {name: "", email: "", password: ""};
+  login_error= {name: "", password: ""};
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
@@ -19,12 +20,26 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  //function when user uses create form
   createUser(){
     console.log("Login Component Register");
     let observable = this._httpService.createUser(this.user);
     observable.subscribe(data => {
-      
+      //if Creating error
+      if(data["message"] == "Error"){
+
+      }
+    })
+  }
+  //function to when user uses Login form
+  loginUser(){
+    console.log("Login Component Login");
+    let observable = this._httpService.loginUser(this.user);
+    observable.subscribe(data => {
+      //if Login error
+      if(data["message"] == "Error"){
+
+      }
     })
   }
 

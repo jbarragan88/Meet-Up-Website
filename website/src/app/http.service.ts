@@ -10,6 +10,9 @@ export class HttpService {
   createUser(user){
     return this._http.post('/api/create/user', user);
   }
+  loginUser(user){
+    return this._http.get('/api/login/user', user);
+  }
   
   // getProducts(){
   //   return this._http.get('/api/all/');
