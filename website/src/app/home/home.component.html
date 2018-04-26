@@ -1,11 +1,32 @@
 <header>
-    <h2>Name: {{ logggedin.name }}</h2>
-    <h2>Email: {{ logggedin.email }}</h2>
-    <button (click)="logOut()">Log Out</button>
+    <h1>Meet-Up Logo</h1>
+    <nav>
+      <ul>
+
+        <li>
+          <a href="#!">Explore</a>
+        </li>
+
+        <li>
+          <a href="#!">Messages</a>
+        </li>
+
+        <li>
+          <a href="#!">Notifications</a>
+        </li>
+
+      </ul>
+    </nav>
+    <a (click)="logOut()">Log Out</a>
 </header>
 <div id="center">
-
+  <div id="events_near">
+    <h2>Find a Meetup</h2>
+    <h4>3 Meetups in your groups - 1,473 Meetups nearby</h4>
+  </div>
+    <h2>Name: {{ logggedin.name }}</h2>
+    <h2>Email: {{ logggedin.email }}</h2>
 </div>
 <footer>
-  
+
 </footer>
