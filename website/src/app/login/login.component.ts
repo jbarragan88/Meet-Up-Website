@@ -30,21 +30,25 @@ export class LoginComponent implements OnInit {
       //if Creating error
       if(data["message"] == "Error"){
 
+        this.create_error= {name: "", email: "", password: ""};
+
+        console.log("Login Componenet Create User Data:", data);
+        if(data["name"] == "Invalid"){
+          this.create_error.name = "Invalid";
+        }
+
+        if(data["email"] == "Invalid"){
+          this.create_error.email = "Invalid";
+        }
+
+        if(data["password"] == "Invalid"){
+          this.create_error.password = "Invalid";
+        }
       }
       //if no errors
       else{
-        let observablee = this._httpService.loginUser(this.register_user);
-        observablee.subscribe(data => {
-        //if Login error
-          if(data["message"] == "Error"){
-
-          }
-          //if no errors
-          else{
-            this.login = this._httpService.success(data['data'])
-            this._router.navigate(['/home']);
-          }
-        })
+          this.login = this._httpService.success(data['data'])
+          this._router.navigate(['/home']);
       }
     })
   }

@@ -28,6 +28,10 @@ export class HttpService {
   getUserEmail(){
     return this.User_Logged_In.email;
   }
+
+  logOut(){
+    return this._http.get('/api/log_out');
+  }
   
   // getProducts(){
   //   return this._http.get('/api/all/');

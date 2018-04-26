@@ -1,4 +1,9 @@
 <h2>Register</h2>
+
+<h4 *ngIf="create_error.name">Name Must Be 4 Or More Characters</h4>
+<h4 *ngIf="create_error.password">Password Must Be 4 Or More Characters</h4>
+<h4 *ngIf="create_error.email">Email In Use</h4>
+
 <form (submit)="createUser()">
   <p>{{ register_user | json}}</p>
   <label for="">Name:</label> 

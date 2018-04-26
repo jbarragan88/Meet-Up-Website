@@ -22,4 +22,12 @@ export class HomeComponent implements OnInit {
     console.log("Home Component On Init user logged in:", this.logggedin)
   }
 
+  logOut(){
+    console.log("Home Component Log Out");
+    let observable = this._httpService.logOut();
+    observable.subscribe(data => {
+      this._router.navigate(['/login']);
+    })
+  }
+
 }

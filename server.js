@@ -87,29 +87,70 @@ app.use(session({secret: 'codingdojorocks'}));  // string for encryption
 //Register User
 app.post('/api/create/user', function(req, res){
     console.log("Server Register User", req.body);
-    var user = new User({
+    var userr = new User({
         name: req.body.name,
         email: req.body.email,
         password: UserSchema.methods.hashPassword(req.body.password)
-})
-    user.save(function(err){
-        if(err){
-            console.log("Server could not Register Error:", err);
-            var message = {message: "Error", data: err};
-            if(req.body.name < 4 || !req.body.name ){
+    })
+    User.findOne({email: req.body.email}, function(err, user){
+
+        if(!user || err){
+
+            console.log("Server Register FINDONE Err:", err)
+            var message= {message: "Error"};
+            if(req.body.name.length < 5 || !req.body.name ||req.body.password.length < 5 || !req.body.password){
+
+                if(req.body.name.length < 5 || !req.body.name){
+                    message.name = "Invalid";
+                }
+
+                if(req.body.password.length < 5 || !req.body.password){
+                    message.password = "Invalid";
+                }
+
+                res.json(message)
+            }
+            else{
+                userr.save(function(err){
+                    if(err){
+                        console.log("Server could not Register Error:", err);
+                        var message = {message: "Error", data: err};
+                        if(req.body.name < 4 || !req.body.name ){
+                            message.name = "Invalid";
+                        }
+                        res.json(message)
+                    }
+                    else{
+                        User.findOne({email: req.body.email}, function (err, user){
+                            req.session.user = user._id
+                            console.log("Successful Register");
+                            res.json({message: "Success", data: userr})
+                        })
+                    }
+                })
+                console.log("Server Added User", user);
+            }
+
+        }
+
+        else{
+            console.log("Server Register Email In use");
+            var message = {message:"Error", email:"Invalid"};
+
+            if(req.body.name.length < 5 || !req.body.name){
+                console.log("Server Register Name Length Invalid");
                 message.name = "Invalid";
             }
+
+            if(req.body.password.length < 5 || !req.body.password){
+                console.log("Server Register Password Length Invalid");
+                message.password = "Invalid";
+            }
+
             res.json(message)
         }
-        else{
-            User.findOne({email: req.body.email}, function (err, user){
-                req.session.user = user._id
-                console.log("Successful Register");
-                res.json({message: "Success", data: user})
-            })
-        }
+
     })
-    console.log("Server Added User", user);
 });
 
 //Login User
@@ -127,6 +168,12 @@ app.post('/api/login/user', function(req, res){
             res.json({message: "Success", data: user})
         }
     })
+});
+
+app.get('/api/log_out', function(req, res){
+    console.log("Server Log Out");
+    req.session.user = "None";
+    res.json({message: "Success"})
 });
 
 // app.post('/api/edit', function(req, res){
