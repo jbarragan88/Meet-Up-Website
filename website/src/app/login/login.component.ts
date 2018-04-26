@@ -9,7 +9,8 @@ import { AppModule } from '../app.module';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  user = {name: "", email: "", password: ""};
+  register_user = {name: "", email: "", password: ""};
+  login_user = {name: "", email: "", password: ""};
   create_error= {name: "", email: "", password: ""};
   login_error= {name: "", password: ""};
   login: any;
@@ -24,7 +25,7 @@ export class LoginComponent implements OnInit {
   //function when user uses create form
   createUser(){
     console.log("Login Component Register");
-    let observable = this._httpService.createUser(this.user);
+    let observable = this._httpService.createUser(this.register_user);
     observable.subscribe(data => {
       //if Creating error
       if(data["message"] == "Error"){
@@ -32,7 +33,7 @@ export class LoginComponent implements OnInit {
       }
       //if no errors
       else{
-        let observablee = this._httpService.loginUser(this.user);
+        let observablee = this._httpService.loginUser(this.register_user);
         observablee.subscribe(data => {
         //if Login error
           if(data["message"] == "Error"){
@@ -40,7 +41,7 @@ export class LoginComponent implements OnInit {
           }
           //if no errors
           else{
-            this.login = this._httpService.success(this.login)
+            this.login = this._httpService.success(data['data'])
             this._router.navigate(['/home']);
           }
         })
@@ -50,7 +51,7 @@ export class LoginComponent implements OnInit {
   //function to when user uses Login form
   loginUser(){
     console.log("Login Component Login");
-    let observable = this._httpService.loginUser(this.user);
+    let observable = this._httpService.loginUser(this.login_user);
     observable.subscribe(data => {
       //if Login error
       if(data["message"] == "Error"){
@@ -58,7 +59,7 @@ export class LoginComponent implements OnInit {
       }
       //if no errors
       else{
-        this.login = this._httpService.success(this.login)
+        this.login = this._httpService.success(data['data'])
         this._router.navigate(['/home']);
       }
     })

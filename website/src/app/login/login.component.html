@@ -1,3 +1,25 @@
-<p>
-  login works!
-</p>
+<h2>Register</h2>
+<form (submit)="createUser()">
+  <p>{{ register_user | json}}</p>
+  <label for="">Name:</label> 
+  <input type="text" name="email" [(ngModel)]="register_user.name" >
+  <br>
+  <label for="">Email:</label>
+  <input type="text" name="email" [(ngModel)]="register_user.email" >
+  <br>
+  <label for="">Password:</label>
+  <input type="password" name="email" [(ngModel)]="register_user.password" >
+  <br>
+  <input type="submit" value="Register" name="submit" id="submit">
+</form>
+<h2>Login</h2>
+<form (submit)="loginUser()">
+    <p>{{ login_user | json}}</p>
+  <label for="">Email:</label>
+  <input type="text" name="email" [(ngModel)]="login_user.email" >
+  <br>
+  <label for="">Password:</label>
+  <input type="password" name="email" [(ngModel)]="login_user.password" >
+  <br>
+  <input type="submit" value="Login" name="submit" id="submit">
+</form>

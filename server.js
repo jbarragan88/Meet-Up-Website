@@ -6,6 +6,8 @@ var app = express();
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var path = require('path');
+var bcrypt = require('bcrypt');
+var session = require('express-session');
 
 var Schema = mongoose.Schema;
 
@@ -33,7 +35,7 @@ var UserSchema = new mongoose.Schema({
         type: String
     }
 }, {timestamps: true } )
-mongoose.model('User', UsertSchema); 
+mongoose.model('User', UserSchema); 
 var User = mongoose.model('User') ;
 
 UserSchema.methods.hashPassword = function(password){
@@ -75,12 +77,14 @@ app.use(express.static(path.join(__dirname, './static')));
 app.set('views', path.join(__dirname, './views'));
 app.use(express.static( __dirname + '/website/dist' ));
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(session({secret: 'codingdojorocks'}));  // string for encryption
 //*
 //*
 //
 //*
 //*
 // Routes
+//Register User
 app.post('/api/create/user', function(req, res){
     console.log("Server Register User", req.body);
     var user = new User({
@@ -98,13 +102,18 @@ app.post('/api/create/user', function(req, res){
             res.json(message)
         }
         else{
-            console.log("Successful Register");
-            res.json({message: "Success", data: "made it"})
+            User.findOne({email: req.body.email}, function (err, user){
+                req.session.user = user._id
+                console.log("Successful Register");
+                res.json({message: "Success", data: user})
+            })
         }
     })
     console.log("Server Added User", user);
 });
-app.get('/api/login/user', function(req, res){
+
+//Login User
+app.post('/api/login/user', function(req, res){
     console.log("Server Login User", req.body);
     User.findOne({email: req.body.email}, function(err, user){
         if(err){
@@ -112,6 +121,8 @@ app.get('/api/login/user', function(req, res){
             res.json({message: "Error", data: err})
         }
         else{
+            console.log("Server Login User Success User:", user)
+            req.session.user = user._id
             console.log("Success Loggin In");
             res.json({message: "Success", data: user})
         }

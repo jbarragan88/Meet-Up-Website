@@ -8,14 +8,25 @@ export class HttpService {
   constructor(private _http: HttpClient) { }
 
   createUser(user){
+    console.log("Service Register User:", user);
     return this._http.post('/api/create/user', user);
   }
   loginUser(user){
-    return this._http.get('/api/login/user', user);
+    console.log("Service Login User:", user);
+    return this._http.post('/api/login/user', user);
   }
   success(user){
+    console.log("Service Success:", user)
     this.User_Logged_In = user;
+    console.log("Service User logged in var:", this.User_Logged_In)
     return this.User_Logged_In;
+  }
+  getUserName(){
+    return this.User_Logged_In.name;
+  }
+
+  getUserEmail(){
+    return this.User_Logged_In.email;
   }
   
   // getProducts(){
