@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
   register_user = {name: "", email: "", password: ""};
   login_user = {name: "", email: "", password: ""};
   create_error= {name: "", email: "", password: ""};
-  login_error= {name: "", password: ""};
+  login_error= {email: "", password: ""};
   login: any;
   constructor(
     private _route: ActivatedRoute,
@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit {
         if(data["password"] == "Invalid"){
           this.create_error.password = "Invalid";
         }
+
       }
       //if no errors
       else{
@@ -59,6 +60,17 @@ export class LoginComponent implements OnInit {
     observable.subscribe(data => {
       //if Login error
       if(data["message"] == "Error"){
+
+        this.login_error= {email: "", password: ""};
+
+        console.log("Login Componenet Login User Data:", data);
+        if(data["email"] == "Invalid"){
+          this.login_error.email = "Invalid";
+        }
+
+        if(data["password"] == "Invalid"){
+          this.login_error.password = "Invalid";
+        }
 
       }
       //if no errors

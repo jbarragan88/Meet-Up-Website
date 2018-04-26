@@ -155,19 +155,50 @@ app.post('/api/create/user', function(req, res){
 
 //Login User
 app.post('/api/login/user', function(req, res){
-    console.log("Server Login User", req.body);
-    User.findOne({email: req.body.email}, function(err, user){
-        if(err){
-            console.log("Server cannot log in this user Error:", err);
-            res.json({message: "Error", data: err})
+
+    if(!req.body.email || !req.body.password){
+        var message = {message: "Error"}
+        if(!req.body.email){
+            message.email = "Invalid";
         }
-        else{
-            console.log("Server Login User Success User:", user)
-            req.session.user = user._id
-            console.log("Success Loggin In");
-            res.json({message: "Success", data: user})
+        if(!req.body.password){
+            message.password = "Invalid";
         }
-    })
+        res.json(message);
+    }
+
+    else{
+
+        console.log("Server Login User", req.body);
+        User.findOne({email: req.body.email}, function(err, user){
+
+            if(!user || err){
+
+                var message= {message: "Error", email:"Invalid"};
+                console.log("Server cannot log in this user Error:", err);
+
+                res.json(message)
+
+            }
+
+            else{
+
+                if(UserSchema.methods.validPassword(req.body.password, user.password)){
+                    console.log("Server Login User Success User:", user)
+                    req.session.user = user._id
+                    console.log("Success Loggin In");
+                    res.json({message: "Success", data: user})
+                }
+                else{
+                    res.json({message: "Error", password: "Invalid"})
+                }
+
+            }
+
+        })
+
+    }
+
 });
 
 app.get('/api/log_out', function(req, res){
