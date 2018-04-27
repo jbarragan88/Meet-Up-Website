@@ -3,6 +3,7 @@
 }
 #center {
     /* text-align: center; */
+    background-color: #E7E6E6;
 }
 ul{
     list-style-type: none;
@@ -26,7 +27,7 @@ a:hover {
 }
 h1{
     display: inline-block;
-    margin-right: 590px;
+    margin-right: 510px;
 }
 #events_near {
     background-color: red;
@@ -92,4 +93,46 @@ button {
     border: 1px solid gray;
     display: inline-block;
     width: 100px;
+}
+#dates {
+    border: 2px solid red;
+    height: 500px;
+    width: 930px;
+    margin-left: 250px;
+}
+#dates_details {
+    /* border: 1px solid black; */
+    width: 600px;
+    display: inline-block;
+}
+.date p {
+    font-weight: 900;
+    font-size: 20px;
+    margin: 20px 0 25px 30px;
+}
+.details {
+    background-color: white;
+    border: 0.5px solid gray;
+    padding-top: 15px;
+}
+.time {
+    display: inline-block;
+    vertical-align: top;
+}
+.time p {
+    font-weight: normal;
+    color: gray;
+}
+#name {
+    display: inline-block;
+    margin-left: 20px;
+}
+#name p {
+    font-weight: normal;
+    margin: 0 0 0 0;
+}
+#dates_nav {
+    border: 1px solid black;
+    width: 322px;
+    display: inline-block;
 }
