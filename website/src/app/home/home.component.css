@@ -135,4 +135,25 @@ button {
     border: 1px solid black;
     width: 322px;
     display: inline-block;
+    vertical-align: top;
+}
+#meetup_nav {
+    background-color: white;
+    border: 0.5px solid gray;
+    margin-top: 71px;
+}
+#meetup_nav li {
+    display: block;
+    margin: 0;
+    border: 0.5px solid gray;
+}
+#meetup_nav ul {
+    margin: 0;
+    padding: 0;
+}
+#meetup_nav a:hover {
+    color: purple;
+    background-color: gray;
+    padding: 0;
+    border-left: 2px solid purple;
 }
