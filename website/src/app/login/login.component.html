@@ -1,3 +1,7 @@
+<header>
+  <h1>MeetUpLogo</h1>
+  <hr>
+</header>
 <div id="container">
   <h2>Sign Up</h2>
 
@@ -8,17 +12,18 @@
   <form (submit)="createUser()">
       <!-- <p>{{ register_user | json}}</p> -->
     <label for="">Your name</label> 
-    <br>
     <input type="text" name="email" [(ngModel)]="register_user.name" >
     <br>
     <label for="">Email address</label>
-    <br>
     <input type="text" name="email" [(ngModel)]="register_user.email" >
     <br>
     <label for="">Password</label>
-    <br>
     <input type="password" name="email" [(ngModel)]="register_user.password" >
     <br>
+    <small>
+      Your name is public. We'll use your email adress to send you updates, and your location to find Meetups near you.
+      Once I implement it into this project.
+    </small>
     <input type="submit" value="Register" name="submit" id="submit">
   </form>
   <h2>Login</h2>
@@ -27,11 +32,9 @@
   <form (submit)="loginUser()">
       <!-- <p>{{ login_user | json}}</p> -->
     <label for="">Email address</label>
-    <br>
     <input type="text" name="email" [(ngModel)]="login_user.email" >
     <br>
     <label for="">Password</label>
-    <br>
     <input type="password" name="email" [(ngModel)]="login_user.password" >
     <br>
     <input type="submit" value="Login" name="submit" id="submit">

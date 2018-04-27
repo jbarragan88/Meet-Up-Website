@@ -1,11 +1,30 @@
-#container {
+#container{
+    margin: 0 0 0 500px;
     text-align: center;
+    width: 400px;
 }
-h2 {
+h2{
     font-size: 40px;
 }
-input {
+input{
     width: 400px;
     height: 30px;
     margin-bottom: 20px;
+}
+label {
+    text-align: left;
+    margin-bottom: 0;
+    display: block;
+}
+small {
+    display: block;
+    text-align: left;
+    color: gray;
+    margin-bottom: 10px;
+}
+#submit {
+    height: 40px;
+    background-color: red;
+    border-radius: 5px;
+    color: white;
 }
