@@ -95,7 +95,7 @@ button {
     width: 100px;
 }
 #dates {
-    border: 2px solid red;
+    /* border: 2px solid red; */
     height: 500px;
     width: 930px;
     margin-left: 250px;
@@ -132,7 +132,7 @@ button {
     margin: 0 0 0 0;
 }
 #dates_nav {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     width: 322px;
     display: inline-block;
     vertical-align: top;
@@ -146,6 +146,7 @@ button {
     display: block;
     margin: 0;
     border: 0.5px solid gray;
+    width: 322px;
 }
 #meetup_nav ul {
     margin: 0;
