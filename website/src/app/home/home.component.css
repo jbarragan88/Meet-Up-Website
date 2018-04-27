@@ -55,6 +55,7 @@ h1{
 #search input {
     height: 50px;
     width: 270px;
+    color: black;
 }
 #search a {
     color: white;
@@ -62,8 +63,33 @@ h1{
 #search p {
     display: inline-block;
 }
-#mySubmit {
+#search form {
+    padding: 0px;
+}
+form p {
+    vertical-align: top;
+}
+/* #mySubmit {
     visibility: hidden;
     float: right;
     position: absolute;
+}*/
+.glyphicon {
+    font-size: 33px;
+} 
+button {
+    background-color: black;
+    border: none;
+}
+#border {
+    /*     padding: 10px; */
+        margin-left: 180px;
+        font-size: 20px;
+        border: 1px solid gray;
+        height: 50px;
+    }
+#border a {
+    border: 1px solid gray;
+    display: inline-block;
+    width: 100px;
 }
