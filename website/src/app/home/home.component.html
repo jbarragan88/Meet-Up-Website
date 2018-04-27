@@ -15,18 +15,41 @@
           <a href="#!">Notifications</a>
         </li>
 
+        <li>
+            <a (click)="logOut()">Log Out</a>
+        </li>
+
       </ul>
     </nav>
-    <a (click)="logOut()">Log Out</a>
 </header>
+
 <div id="center">
+
   <div id="events_near">
     <h2>Find a Meetup</h2>
     <h4>3 Meetups in your groups - 1,473 Meetups nearby</h4>
+
+  <div id="search">
+    <form action="#!">
+      <input type="text" placeholder="All Meetups">
+      <!-- <button type="submit">
+          <span class="glyphicon glyphicon-search"></span>
+        </button> -->
+        <label for="mySubmit"> <span class="glyphicon glyphicon-search"></span>Search me</label>
+    <input id="mySubmit" type="submit" class="hidden" />
+      <p>within 5 miles of Chicago,IL</p>
+      <p id="border"><a href="#!">Groups</a><a href="#!">Calendar</a></p>
+    </form>
+    <span class="glyphicon glyphicon-search"></span>
   </div>
+
+</div>
+
     <h2>Name: {{ logggedin.name }}</h2>
     <h2>Email: {{ logggedin.email }}</h2>
+
 </div>
+
 <footer>
 
 </footer>
